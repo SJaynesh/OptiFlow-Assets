@@ -292,7 +292,7 @@ class SignInPageScreen extends StatelessWidget {
       DocumentSnapshot<Map<String, dynamic>> data = await FCMHelper
           .fcmHelper.firestore
           .collection("Inventory-Management")
-          .doc("jayneshsarkar@gmail.com")
+          .doc(adminEmail)
           .collection("Users")
           .doc(email)
           .get();

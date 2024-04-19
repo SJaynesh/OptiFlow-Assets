@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../modules/utils/controllers/bottom_navigation_bar_controller.dart';
+import '../../../../modules/utils/globals/routes.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({super.key});
@@ -49,104 +50,133 @@ class _HomePageScreenState extends State<HomePageScreen> {
         Provider.of<BottomNavigationBarController>(context, listen: true);
     var providerFalse =
         Provider.of<BottomNavigationBarController>(context, listen: false);
-    return Scaffold(
-      appBar: AppBar(
-        surfaceTintColor: Colors.white,
-        title: StreamBuilder(
-          stream: FCMHelper.fcmHelper.getAdminData(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (snapshot.hasData) {
-              DocumentSnapshot<Map<String, dynamic>>? data = snapshot.data;
-              Map<String, dynamic> userData = data!.data() ?? {};
-              return Text(
-                "${userData["Company Name"]}",
-                style: TextStyle(
-                  fontSize: textScaler.scale(20),
-                  fontWeight: FontWeight.bold,
-                ),
-              );
-            }
-            return Container();
-          },
-        ),
-        actions: [
-          GestureDetector(
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: Text(
-                      "Logout",
-                      style: TextStyle(
-                        fontSize: textScaler.scale(25),
-                        fontWeight: FontWeight.bold,
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (val) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text("Alert !!"),
+            content: const Text("Are you sure to exit?"),
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  // _canPop = true;
+                  exit(0);
+                },
+                child: const Text("Yes"),
+              ),
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  // _canPop = false;
+                },
+                child: const Text("No"),
+              ),
+            ],
+          ),
+        );
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          surfaceTintColor: Colors.white,
+          title: StreamBuilder(
+            stream: FCMHelper.fcmHelper.getAdminData(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (snapshot.hasData) {
+                DocumentSnapshot<Map<String, dynamic>>? data = snapshot.data;
+                Map<String, dynamic> userData = data!.data() ?? {};
+                return Text(
+                  "${userData["Company Name"]}",
+                  style: TextStyle(
+                    fontSize: textScaler.scale(20),
+                    fontWeight: FontWeight.bold,
+                  ),
+                );
+              }
+              return Container();
+            },
+          ),
+          actions: [
+            GestureDetector(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text(
+                        "Logout",
+                        style: TextStyle(
+                          fontSize: textScaler.scale(25),
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    content: Text(
-                      "Are you sure you want to logout?",
-                      style: TextStyle(
-                        fontSize: textScaler.scale(18),
+                      content: Text(
+                        "Are you sure you want to logout?",
+                        style: TextStyle(
+                          fontSize: textScaler.scale(18),
+                        ),
                       ),
-                    ),
-                    actions: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          OutlinedButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text("Cancel"),
-                          ),
-                          SizedBox(
-                            width: h * 0.02,
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              FireBaseAuthHelper.firebaseAuth.signOut();
-                              exit(0);
-                            },
-                            child: const Text(
-                              "Logout",
-                              style: TextStyle(
-                                color: Colors.red,
+                      actions: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            OutlinedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text("Cancel"),
+                            ),
+                            SizedBox(
+                              width: h * 0.02,
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                FireBaseAuthHelper.firebaseAuth
+                                    .signOut()
+                                    .then((value) {
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      Routes.introScreen, (route) => false);
+                                });
+                              },
+                              child: const Text(
+                                "Logout",
+                                style: TextStyle(
+                                  color: Colors.red,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      )
-                    ],
-                  );
-                },
-              );
-            },
-            child: Image.asset(
-              "assets/images/splash_images/splash_image.png",
-              height: h * 0.03,
+                          ],
+                        )
+                      ],
+                    );
+                  },
+                );
+              },
+              child: Image.asset(
+                "assets/images/splash_images/splash_image.png",
+                height: h * 0.03,
+              ),
             ),
-          ),
-          SizedBox(
-            width: w * 0.04,
-          ),
-        ],
-      ),
-      body: providerFalse.barModel.componet[providerTrue.barModel.index],
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: (providerTrue.barModel.isAnimated)
-          ? FloatingActionButton(
-              shape: const CircleBorder(),
-              onPressed: () {
-                setState(() {
-                  isChart = !isChart;
+            SizedBox(
+              width: w * 0.04,
+            ),
+          ],
+        ),
+        body: providerFalse.barModel.componet[providerTrue.barModel.index],
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: (providerTrue.barModel.isAnimated)
+            ? FloatingActionButton(
+                shape: const CircleBorder(),
+                onPressed: () {
                   Navigator.of(context).push(
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) =>
-                          const AllProductPageComponet(),
+                          AllProductPageComponet(),
                       transitionDuration: const Duration(seconds: 1),
                       reverseTransitionDuration: const Duration(seconds: 1),
                       transitionsBuilder:
@@ -165,29 +195,29 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       },
                     ),
                   );
-                });
-              },
-              backgroundColor: const Color(0xffffa401),
-              child: Icon(
-                Icons.add,
-                size: h * 0.035,
-              ),
-            )
-          : null,
-      bottomNavigationBar: AnimatedBottomNavigationBar(
-        icons: iconList,
-        activeIndex: providerTrue.barModel.index,
-        onTap: (index) {
-          providerFalse.getNavigationBarIndexValue(val: index);
-        },
-        gapLocation: GapLocation.center,
-        notchSmoothness: NotchSmoothness.verySmoothEdge,
-        backgroundColor: const Color(0xff383a37),
-        inactiveColor: Colors.white,
-        activeColor: const Color(0xffffa401),
-        height: h * 0.1,
-        leftCornerRadius: 40,
-        rightCornerRadius: 40,
+                },
+                backgroundColor: const Color(0xffffa401),
+                child: Icon(
+                  Icons.add,
+                  size: h * 0.035,
+                ),
+              )
+            : null,
+        bottomNavigationBar: AnimatedBottomNavigationBar(
+          icons: iconList,
+          activeIndex: providerTrue.barModel.index,
+          onTap: (index) {
+            providerFalse.getNavigationBarIndexValue(val: index);
+          },
+          gapLocation: GapLocation.center,
+          notchSmoothness: NotchSmoothness.verySmoothEdge,
+          backgroundColor: const Color(0xff383a37),
+          inactiveColor: Colors.white,
+          activeColor: const Color(0xffffa401),
+          height: h * 0.1,
+          leftCornerRadius: 40,
+          rightCornerRadius: 40,
+        ),
       ),
     );
   }

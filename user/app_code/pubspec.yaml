@@ -49,6 +49,14 @@ dependencies:
   shimmer: ^3.0.0
   cached_network_image: ^3.3.1
   change_app_package_name: ^1.1.0
+  flutter_launcher_icons: ^0.11.0
+
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/splash_images/optiflow.png"
+  remove_alpha_ios: true
 
 dev_dependencies:
   flutter_test:
@@ -82,6 +90,7 @@ flutter:
     - assets/images/request_page_images/
     - assets/images/sales_page_images/
     - assets/images/setting_user_page/
+    - assets/images/detail_page_images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

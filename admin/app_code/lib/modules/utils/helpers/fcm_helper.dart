@@ -1,10 +1,11 @@
 import 'dart:developer';
 
+import 'package:app_code/modules/utils/models/all_product_page_model.dart';
+import 'package:app_code/modules/utils/models/chat_model.dart';
 import 'package:app_code/modules/utils/models/department_page_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-import '../globals/routes.dart';
 import '../models/organization_page_model.dart';
 import 'firebase_auth_helper.dart';
 
@@ -32,6 +33,20 @@ class FCMHelper {
         .collection(inventoryCollection)
         .doc(userData.emailId)
         .set(userData.toMap());
+
+    await firestore
+        .collection(inventoryCollection)
+        .doc(userData.emailId)
+        .collection(userCollection)
+        .doc(userData.emailId)
+        .set({
+      'bio': userData.companyName,
+      'department': 'Owner',
+      'email': userData.emailId,
+      'fullName': userData.fullName,
+      'profileImage':
+          "https://cdn5.vectorstock.com/i/1000x1000/30/24/business-man-entrepreneur-close-up-cartoon-flat-vector-18203024.jpg",
+    });
 
     String email = FireBaseAuthHelper.firebaseAuth.firebase.currentUser!.email!;
 
@@ -111,8 +126,6 @@ class FCMHelper {
       'bgImage': (bgImage is! String)
           ? await bgReference.ref.getDownloadURL()
           : bgImage,
-    }).then((value) {
-      log("With Null Image Updated Successfully");
     });
   }
 
@@ -138,7 +151,8 @@ class FCMHelper {
         .get();
 
     Map<String, dynamic> department = departmentData.data() ?? {};
-    List items = department[departmentPageModel.department!] ??= [];
+    log("MYDEPARTMENT: ${departmentPageModel.department}");
+    List items = department[departmentPageModel.department!] ?? [];
 
     items.add({
       'title': departmentPageModel.title,
@@ -285,5 +299,183 @@ class FCMHelper {
         .snapshots();
   }
 
-  void deleteProduct() {}
+  Future<void> deleteProduct({
+    required String department,
+    required String name,
+  }) async {
+    String email = FireBaseAuthHelper.firebaseAuth.firebase.currentUser!.email!;
+
+    DocumentSnapshot<Map<String, dynamic>> data = await firestore
+        .collection(inventoryCollection)
+        .doc(email)
+        .collection(departmentCollection)
+        .doc(department)
+        .get();
+
+    Map<String, dynamic> myData = data.data() ?? {};
+    List items = myData[department];
+
+    log("ITEMS : $items");
+    items.removeWhere((element) => element['title'] == name);
+
+    await firestore
+        .collection(inventoryCollection)
+        .doc(email)
+        .collection(departmentCollection)
+        .doc(department)
+        .set({
+      department: items,
+    });
+
+    DocumentSnapshot<Map<String, dynamic>> summaryData2 = await firestore
+        .collection(inventoryCollection)
+        .doc(email)
+        .collection(summaryCollection)
+        .doc("summary")
+        .get();
+
+    Map<String, dynamic> summary2 = summaryData2.data() ?? {};
+    int allItems = summary2['items'] ?? 0;
+    allItems--;
+    await firestore
+        .collection(inventoryCollection)
+        .doc(email)
+        .collection(summaryCollection)
+        .doc("summary")
+        .update({
+      'items': allItems,
+      'earning': summary2['earning'],
+      'sales': summary2['sales'],
+    });
+  }
+
+  Future<void> editProduct(
+      {required AllProductPageModel allProductPageModel,
+      required String title}) async {
+    String email = FireBaseAuthHelper.firebaseAuth.firebase.currentUser!.email!;
+
+    DocumentSnapshot<Map<String, dynamic>> data = await firestore
+        .collection(inventoryCollection)
+        .doc(email)
+        .collection(departmentCollection)
+        .doc(allProductPageModel.department)
+        .get();
+
+    Map<String, dynamic> myData = data.data() ?? {};
+    List items = myData[allProductPageModel.department];
+
+    items.forEach((e) {
+      if (e['title'] == title) {
+        e['description'] = allProductPageModel.description;
+        e['price'] = allProductPageModel.price;
+        e['qty'] = allProductPageModel.qty;
+        e['title'] = allProductPageModel.title;
+      }
+    });
+
+    await firestore
+        .collection(inventoryCollection)
+        .doc(email)
+        .collection(departmentCollection)
+        .doc(allProductPageModel.department)
+        .set({
+      allProductPageModel.department: items,
+    });
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getAllUsers() {
+    String email = FireBaseAuthHelper.firebaseAuth.firebase.currentUser!.email!;
+    return firestore
+        .collection(inventoryCollection)
+        .doc(email)
+        .collection(userCollection)
+        .snapshots();
+  }
+
+  Future<void> sendChat({
+    required String senderId,
+    required String receiverId,
+    required ChatModal chatModal,
+  }) async {
+    chatModal.type = 'sender';
+    await firestore
+        .collection(inventoryCollection)
+        .doc(senderId)
+        .collection(userCollection)
+        .doc(senderId)
+        .collection(receiverId)
+        .doc(chatModal.getId)
+        .set(chatModal.toMap);
+
+    chatModal.type = 'receiver';
+
+    await firestore
+        .collection(inventoryCollection)
+        .doc(senderId)
+        .collection(userCollection)
+        .doc(receiverId)
+        .collection(senderId)
+        .doc(chatModal.getId)
+        .set(chatModal.toMap);
+
+    // DocumentSnapshot<Map<String, dynamic>> data = await firestore
+    //     .collection(inventoryCollection)
+    //     .doc(senderId)
+    //     .collection(userCollection)
+    //     .doc(receiverId)
+    //     .collection("show")
+    //     .doc("show")
+    //     .get();
+    //
+    // Map<String, dynamic> myData = data.data() ?? {};
+    // int isShow = myData['isShow'] ?? 0;
+    //
+    // await firestore
+    //     .collection(inventoryCollection)
+    //     .doc(senderId)
+    //     .collection(userCollection)
+    //     .doc(receiverId)
+    //     .collection("show")
+    //     .doc("show")
+    //     .set({
+    //   'isShow': ++isShow,
+    // });
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getAllChart({
+    required String senderId,
+    required String receiverId,
+  }) {
+    return firestore
+        .collection(inventoryCollection)
+        .doc(senderId)
+        .collection(userCollection)
+        .doc(senderId)
+        .collection(receiverId)
+        .snapshots();
+  }
+
+  Future<void> deleteChat({
+    required String senderId,
+    required String receiverId,
+    required String date,
+  }) async {
+    await firestore
+        .collection(inventoryCollection)
+        .doc(senderId)
+        .collection(userCollection)
+        .doc(senderId)
+        .collection(receiverId)
+        .doc(date)
+        .delete();
+
+    await firestore
+        .collection(inventoryCollection)
+        .doc(senderId)
+        .collection(userCollection)
+        .doc(receiverId)
+        .collection(senderId)
+        .doc(date)
+        .delete();
+  }
 }

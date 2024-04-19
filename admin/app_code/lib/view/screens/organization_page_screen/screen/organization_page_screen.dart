@@ -27,6 +27,7 @@ class OrganizationPageScreen extends StatelessWidget {
         Provider.of<OrganizationPageController>(context, listen: false);
 
     Map data = ModalRoute.of(context)!.settings.arguments as Map;
+
     return Scaffold(
       backgroundColor: const Color(0xfff4f4f4),
       appBar: AppBar(

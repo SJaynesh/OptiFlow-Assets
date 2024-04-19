@@ -29,6 +29,8 @@ class _SplashScreenState extends State<SplashScreen> {
       String email =
           FireBaseAuthHelper.firebaseAuth.firebase.currentUser!.email!;
 
+      log("USER EMAIL : $adminEmail");
+
       await FCMHelper.fcmHelper.getAdminEmailID();
       DocumentSnapshot<Map<String, dynamic>> data = await FCMHelper
           .fcmHelper.firestore

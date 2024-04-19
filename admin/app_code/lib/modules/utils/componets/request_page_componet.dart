@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:app_code/modules/utils/helpers/fcm_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -112,8 +114,10 @@ class RequestPageComponet extends StatelessWidget {
                                       providerFalse.getNavigationBarIndexValue(
                                           val: 1);
 
-                                      FCMHelper.fcmHelper.deleteRequest(
-                                          date: requestModel.date);
+                                      log("REQUEST: ${RequestModel.myCategory}, ${RequestModel.myProduct}, ${RequestModel.myQty}");
+
+                                      // FCMHelper.fcmHelper.deleteRequest(
+                                      //     date: requestModel.date);
                                     },
                                     style: ButtonStyle(
                                       side: MaterialStateProperty.all(

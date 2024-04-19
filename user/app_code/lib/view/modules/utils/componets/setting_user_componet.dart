@@ -3,11 +3,9 @@ import 'dart:developer';
 import 'package:app_code/view/modules/utils/helpers/fcm_helper.dart';
 import 'package:app_code/view/modules/utils/models/profile_page_model.dart';
 import 'package:app_code/view/screens/edit_page_screen/screen/edit_page_screen.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shimmer/shimmer.dart';
 
 import '../controllers/edit_page_controller.dart';
 
@@ -234,155 +232,148 @@ class SettingUserComponet extends StatelessWidget {
                     child: Column(
                       children: [
                         Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Spacer(),
                             const Icon(
                               Icons.email_outlined,
                               color: Colors.grey,
                             ),
-                            const Spacer(),
-                            Text(
-                              profilePageModel.email,
-                              style: TextStyle(
-                                fontSize: textScaler.scale(14),
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 1,
+                            Padding(
+                              padding: EdgeInsets.only(left: w * 0.08),
+                              child: Text(
+                                profilePageModel.email,
+                                style: TextStyle(
+                                  fontSize: textScaler.scale(14),
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 1,
+                                ),
                               ),
-                            ),
-                            const Spacer(
-                              flex: 5,
                             ),
                           ],
                         ),
                         const Spacer(),
                         Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Spacer(),
                             const Icon(
                               Icons.phone,
                               color: Colors.grey,
                             ),
-                            const Spacer(),
-                            Text(
-                              "+91 ${profilePageModel.phoneNumber}",
-                              style: TextStyle(
-                                fontSize: textScaler.scale(14),
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 1,
+                            Padding(
+                              padding: EdgeInsets.only(left: w * 0.08),
+                              child: Text(
+                                "+91 ${profilePageModel.phoneNumber}",
+                                style: TextStyle(
+                                  fontSize: textScaler.scale(14),
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 1,
+                                ),
                               ),
-                            ),
-                            const Spacer(
-                              flex: 12,
                             ),
                           ],
                         ),
                         const Spacer(),
                         Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Spacer(),
                             const Icon(
                               Icons.cake,
                               color: Colors.grey,
                             ),
-                            const Spacer(),
-                            Text(
-                              profilePageModel.dob,
-                              style: TextStyle(
-                                fontSize: textScaler.scale(14),
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 1,
+                            Padding(
+                              padding: EdgeInsets.only(left: w * 0.08),
+                              child: Text(
+                                profilePageModel.dob,
+                                style: TextStyle(
+                                  fontSize: textScaler.scale(14),
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 1,
+                                ),
                               ),
-                            ),
-                            const Spacer(
-                              flex: 13,
                             ),
                           ],
                         ),
                         const Spacer(),
                         Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Spacer(),
                             const Icon(
                               Icons.wc_outlined,
                               color: Colors.grey,
                             ),
-                            const Spacer(),
-                            Text(
-                              profilePageModel.gender,
-                              style: TextStyle(
-                                fontSize: textScaler.scale(14),
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 1,
+                            Padding(
+                              padding: EdgeInsets.only(left: w * 0.08),
+                              child: Text(
+                                profilePageModel.gender,
+                                style: TextStyle(
+                                  fontSize: textScaler.scale(14),
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 1,
+                                ),
                               ),
-                            ),
-                            const Spacer(
-                              flex: 16,
                             ),
                           ],
                         ),
                         const Spacer(),
                         Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Spacer(),
                             const Icon(
                               Icons.work,
                               color: Colors.grey,
                             ),
-                            const Spacer(),
-                            Text(
-                              profilePageModel.department,
-                              style: TextStyle(
-                                fontSize: textScaler.scale(14),
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 1,
+                            Padding(
+                              padding: EdgeInsets.only(left: w * 0.08),
+                              child: Text(
+                                profilePageModel.department,
+                                style: TextStyle(
+                                  fontSize: textScaler.scale(14),
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 1,
+                                ),
                               ),
-                            ),
-                            const Spacer(
-                              flex: 10,
                             ),
                           ],
                         ),
                         const Spacer(),
                         Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Spacer(),
                             const Icon(
                               Icons.apartment,
                               color: Colors.grey,
                             ),
-                            const Spacer(),
-                            Text(
-                              profilePageModel.companyName,
-                              style: TextStyle(
-                                fontSize: textScaler.scale(14),
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 1,
+                            Padding(
+                              padding: EdgeInsets.only(left: w * 0.08),
+                              child: Text(
+                                profilePageModel.companyName,
+                                style: TextStyle(
+                                  fontSize: textScaler.scale(14),
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 1,
+                                ),
                               ),
-                            ),
-                            const Spacer(
-                              flex: 7,
                             ),
                           ],
                         ),
                         const Spacer(),
                         Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Spacer(),
                             const Icon(
                               Icons.location_on_outlined,
                               color: Colors.grey,
                             ),
-                            const Spacer(),
-                            Text(
-                              profilePageModel.location,
-                              style: TextStyle(
-                                fontSize: textScaler.scale(14),
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 1,
+                            Padding(
+                              padding: EdgeInsets.only(left: w * 0.08),
+                              child: Text(
+                                profilePageModel.location,
+                                style: TextStyle(
+                                  fontSize: textScaler.scale(14),
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 1,
+                                ),
                               ),
-                            ),
-                            const Spacer(
-                              flex: 12,
                             ),
                           ],
                         ),

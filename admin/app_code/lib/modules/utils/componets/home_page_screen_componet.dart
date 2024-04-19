@@ -12,8 +12,7 @@ import '../globals/routes.dart';
 import '../helpers/firebase_auth_helper.dart';
 
 class HomePageComponet extends StatelessWidget {
-  const HomePageComponet({super.key});
-
+  HomePageComponet({super.key});
   @override
   Widget build(BuildContext context) {
     TextScaler textScaler = MediaQuery.of(context).textScaler;
@@ -228,7 +227,7 @@ class HomePageComponet extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: h * 0.38,
+                    height: h * 0.4,
                     padding: EdgeInsets.all(w * 0.03),
                     margin: EdgeInsets.only(
                       top: w * 0.03,
@@ -276,362 +275,400 @@ class HomePageComponet extends StatelessWidget {
                         Expanded(
                           flex: 2,
                           child: LineChart(
-                            (isChart)
-                                ? LineChartData(
-                                    lineTouchData: LineTouchData(
-                                      handleBuiltInTouches: true,
-                                      touchTooltipData: LineTouchTooltipData(
-                                        getTooltipColor: (touchedSpot) =>
-                                            Colors.blueGrey.withOpacity(0.8),
-                                      ),
-                                    ),
-                                    gridData: const FlGridData(show: true),
-                                    titlesData: FlTitlesData(
-                                      bottomTitles: AxisTitles(
-                                        sideTitles: SideTitles(
-                                          showTitles: true,
-                                          reservedSize: 32,
-                                          interval: 1,
-                                          getTitlesWidget: (value, meta) {
-                                            final style = TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: textScaler.scale(16),
-                                              color: Colors.grey,
-                                            );
-                                            Widget text;
-                                            switch (value.toInt()) {
-                                              case 2:
-                                                text = Text(
-                                                  'JAN',
-                                                  style: style,
-                                                );
-                                                break;
-                                              case 7:
-                                                text = Text(
-                                                  'FEB',
-                                                  style: style,
-                                                );
-                                                break;
-                                              case 12:
-                                                text = Text(
-                                                  'MAR',
-                                                  style: style,
-                                                );
-                                                break;
-                                              default:
-                                                text = const Text('');
-                                                break;
-                                            }
+                            LineChartData(
+                              lineTouchData: LineTouchData(
+                                handleBuiltInTouches: true,
+                                touchTooltipData: LineTouchTooltipData(
+                                  getTooltipColor: (touchedSpot) =>
+                                      Colors.blueGrey.withOpacity(0.8),
+                                ),
+                              ),
+                              gridData: const FlGridData(show: true),
+                              titlesData: FlTitlesData(
+                                bottomTitles: AxisTitles(
+                                  sideTitles: SideTitles(
+                                    showTitles: true,
+                                    reservedSize: 32,
+                                    interval: 1,
+                                    getTitlesWidget: (value, meta) {
+                                      final style = TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: textScaler.scale(16),
+                                        color: Colors.grey,
+                                      );
+                                      Widget text;
+                                      switch (value.toInt()) {
+                                        case 2:
+                                          text = Text(
+                                            'JAN',
+                                            style: style,
+                                          );
+                                          break;
+                                        case 7:
+                                          text = Text(
+                                            'FEB',
+                                            style: style,
+                                          );
+                                          break;
+                                        case 12:
+                                          text = Text(
+                                            'MAR',
+                                            style: style,
+                                          );
+                                          break;
+                                        default:
+                                          text = const Text('');
+                                          break;
+                                      }
 
-                                            return SideTitleWidget(
-                                              axisSide: meta.axisSide,
-                                              space: 10,
-                                              child: text,
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                      rightTitles: const AxisTitles(
-                                        sideTitles:
-                                            SideTitles(showTitles: false),
-                                      ),
-                                      topTitles: const AxisTitles(
-                                        sideTitles:
-                                            SideTitles(showTitles: false),
-                                      ),
-                                      leftTitles: AxisTitles(
-                                        sideTitles: SideTitles(
-                                          getTitlesWidget: (value, meta) {
-                                            final style = TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: textScaler.scale(14),
-                                              color: const Color(0xff8383D7FF),
-                                            );
-                                            String text;
-                                            switch (value.toInt()) {
-                                              case 1:
-                                                text = '1m';
-                                                break;
-                                              case 2:
-                                                text = '2m';
-                                                break;
-                                              case 3:
-                                                text = '3m';
-                                                break;
-                                              case 4:
-                                                text = '5m';
-                                                break;
-                                              case 5:
-                                                text = '6m';
-                                                break;
-                                              default:
-                                                return Container();
-                                            }
-
-                                            return Text(
-                                              text,
-                                              style: style,
-                                              textAlign: TextAlign.center,
-                                            );
-                                          },
-                                          showTitles: true,
-                                          interval: 1,
-                                          reservedSize: 40,
-                                        ),
-                                      ),
-                                    ),
-                                    borderData: FlBorderData(
-                                      show: true,
-                                      border: Border(
-                                        bottom: BorderSide(
-                                          color: const Color(0xFF50E4FF)
-                                              .withOpacity(0.2),
-                                          width: 4,
-                                        ),
-                                        left: const BorderSide(
-                                            color: Colors.transparent),
-                                        right: const BorderSide(
-                                            color: Colors.transparent),
-                                        top: const BorderSide(
-                                            color: Colors.transparent),
-                                      ),
-                                    ),
-                                    lineBarsData: [
-                                      LineChartBarData(
-                                        isCurved: true,
-                                        color: const Color(0xFF3BFF49),
-                                        barWidth: 8,
-                                        isStrokeCapRound: true,
-                                        dotData: const FlDotData(show: false),
-                                        belowBarData: BarAreaData(
-                                          show: false,
-                                        ),
-                                        spots: const [
-                                          FlSpot(1, 1),
-                                          FlSpot(3, 1.5),
-                                          FlSpot(5, 1.4),
-                                          FlSpot(7, 3.4),
-                                          FlSpot(10, 2),
-                                          FlSpot(12, 2.2),
-                                          FlSpot(13, 1.8),
-                                        ],
-                                      ),
-                                      LineChartBarData(
-                                        isCurved: true,
-                                        color: const Color(0xFFFF3AF2)
-                                            .withOpacity(0.5),
-                                        barWidth: 8,
-                                        isStrokeCapRound: true,
-                                        dotData: const FlDotData(show: false),
-                                        belowBarData: BarAreaData(
-                                          show: true,
-                                          color: const Color(0xFFFF3AF2)
-                                              .withOpacity(0.2),
-                                        ),
-                                        spots: const [
-                                          FlSpot(1, 1),
-                                          FlSpot(3, 2.8),
-                                          FlSpot(7, 1.2),
-                                          FlSpot(10, 2.8),
-                                          FlSpot(12, 2.6),
-                                          FlSpot(13, 3.9),
-                                        ],
-                                      ),
-                                      LineChartBarData(
-                                        isCurved: true,
-                                        // curveSmoothness: 0,
-                                        color: const Color(0xFF50E4FF)
-                                            .withOpacity(0.5),
-                                        barWidth: 8,
-                                        isStrokeCapRound: true,
-                                        dotData: const FlDotData(show: true),
-                                        belowBarData: BarAreaData(show: false),
-                                        spots: const [
-                                          FlSpot(1, 3.8),
-                                          FlSpot(3, 1.9),
-                                          FlSpot(6, 5),
-                                          FlSpot(10, 3.3),
-                                          FlSpot(13, 4.5),
-                                        ],
-                                      ),
-                                    ],
-                                    minX: 0,
-                                    maxX: 14,
-                                    maxY: 4,
-                                    minY: 0,
-                                    // lineTouchData: const LineTouchData(enabled: false),
-                                  )
-                                : LineChartData(
-                                    lineTouchData: const LineTouchData(
-                                      enabled: false,
-                                    ),
-                                    gridData: const FlGridData(show: false),
-                                    titlesData: FlTitlesData(
-                                      bottomTitles: AxisTitles(
-                                        sideTitles: SideTitles(
-                                          showTitles: true,
-                                          reservedSize: 32,
-                                          interval: 1,
-                                          getTitlesWidget: (value, meta) {
-                                            const style = TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16,
-                                            );
-                                            Widget text;
-                                            switch (value.toInt()) {
-                                              case 2:
-                                                text = const Text('SEPT',
-                                                    style: style);
-                                                break;
-                                              case 7:
-                                                text = const Text('OCT',
-                                                    style: style);
-                                                break;
-                                              case 12:
-                                                text = const Text('DEC',
-                                                    style: style);
-                                                break;
-                                              default:
-                                                text = const Text('');
-                                                break;
-                                            }
-
-                                            return SideTitleWidget(
-                                              axisSide: meta.axisSide,
-                                              space: 10,
-                                              child: text,
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                      rightTitles: const AxisTitles(
-                                        sideTitles:
-                                            SideTitles(showTitles: false),
-                                      ),
-                                      topTitles: const AxisTitles(
-                                        sideTitles:
-                                            SideTitles(showTitles: false),
-                                      ),
-                                      leftTitles: AxisTitles(
-                                        sideTitles: SideTitles(
-                                          getTitlesWidget: (value, meta) {
-                                            const style = TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 14,
-                                            );
-                                            String text;
-                                            switch (value.toInt()) {
-                                              case 1:
-                                                text = '1m';
-                                                break;
-                                              case 2:
-                                                text = '2m';
-                                                break;
-                                              case 3:
-                                                text = '3m';
-                                                break;
-                                              case 4:
-                                                text = '5m';
-                                                break;
-                                              case 5:
-                                                text = '6m';
-                                                break;
-                                              default:
-                                                return Container();
-                                            }
-
-                                            return Text(
-                                              text,
-                                              style: style,
-                                              textAlign: TextAlign.center,
-                                            );
-                                          },
-                                          showTitles: true,
-                                          interval: 1,
-                                          reservedSize: 40,
-                                        ),
-                                      ),
-                                    ),
-                                    borderData: FlBorderData(
-                                      show: true,
-                                      border: Border(
-                                        bottom: BorderSide(
-                                            color: const Color(0xFF50E4FF)
-                                                .withOpacity(0.2),
-                                            width: 4),
-                                        left: const BorderSide(
-                                            color: Colors.transparent),
-                                        right: const BorderSide(
-                                            color: Colors.transparent),
-                                        top: const BorderSide(
-                                            color: Colors.transparent),
-                                      ),
-                                    ),
-                                    lineBarsData: [
-                                      LineChartBarData(
-                                        isCurved: true,
-                                        // curveSmoothness: 0,
-                                        color: const Color(0xFF3BFF49)
-                                            .withOpacity(0.5),
-                                        barWidth: 4,
-                                        isStrokeCapRound: true,
-                                        dotData: const FlDotData(show: false),
-                                        belowBarData: BarAreaData(show: false),
-                                        spots: const [
-                                          FlSpot(1, 1),
-                                          FlSpot(3, 4),
-                                          FlSpot(5, 1.8),
-                                          FlSpot(7, 5),
-                                          FlSpot(10, 2),
-                                          FlSpot(12, 2.2),
-                                          FlSpot(13, 1.8),
-                                        ],
-                                      ),
-                                      LineChartBarData(
-                                        isCurved: true,
-                                        color: const Color(0xFFFF3AF2)
-                                            .withOpacity(0.5),
-                                        barWidth: 4,
-                                        isStrokeCapRound: true,
-                                        dotData: const FlDotData(show: false),
-                                        belowBarData: BarAreaData(
-                                          show: true,
-                                          color: const Color(0xFFFF3AF2)
-                                              .withOpacity(0.2),
-                                        ),
-                                        spots: const [
-                                          FlSpot(1, 1),
-                                          FlSpot(3, 2.8),
-                                          FlSpot(7, 1.2),
-                                          FlSpot(10, 2.8),
-                                          FlSpot(12, 2.6),
-                                          FlSpot(13, 3.9),
-                                        ],
-                                      ),
-                                      LineChartBarData(
-                                        isCurved: true,
-                                        // curveSmoothness: 0,
-                                        color: const Color(0xFF50E4FF)
-                                            .withOpacity(0.5),
-                                        barWidth: 4,
-                                        isStrokeCapRound: true,
-                                        dotData: const FlDotData(show: true),
-                                        belowBarData: BarAreaData(show: false),
-                                        spots: const [
-                                          FlSpot(1, 3.8),
-                                          FlSpot(3, 1.9),
-                                          FlSpot(6, 5),
-                                          FlSpot(10, 3.3),
-                                          FlSpot(13, 4.5),
-                                        ],
-                                      )
-                                    ],
-                                    minX: 0,
-                                    maxX: 14,
-                                    maxY: 6,
-                                    minY: 0,
-                                    // lineTouchData: const LineTouchData(enabled: false),
+                                      return SideTitleWidget(
+                                        axisSide: meta.axisSide,
+                                        space: 10,
+                                        child: text,
+                                      );
+                                    },
                                   ),
+                                ),
+                                rightTitles: const AxisTitles(
+                                  sideTitles: SideTitles(showTitles: false),
+                                ),
+                                topTitles: const AxisTitles(
+                                  sideTitles: SideTitles(showTitles: false),
+                                ),
+                                leftTitles: AxisTitles(
+                                  sideTitles: SideTitles(
+                                    getTitlesWidget: (value, meta) {
+                                      final style = TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: textScaler.scale(14),
+                                        color: const Color(0xff8383D7FF),
+                                      );
+                                      String text;
+                                      switch (value.toInt()) {
+                                        case 1:
+                                          text = '1m';
+                                          break;
+                                        case 2:
+                                          text = '2m';
+                                          break;
+                                        case 3:
+                                          text = '3m';
+                                          break;
+                                        case 4:
+                                          text = '5m';
+                                          break;
+                                        case 5:
+                                          text = '6m';
+                                          break;
+                                        default:
+                                          return Container();
+                                      }
+
+                                      return Text(
+                                        text,
+                                        style: style,
+                                        textAlign: TextAlign.center,
+                                      );
+                                    },
+                                    showTitles: true,
+                                    interval: 1,
+                                    reservedSize: 40,
+                                  ),
+                                ),
+                              ),
+                              borderData: FlBorderData(
+                                show: true,
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: const Color(0xFF50E4FF)
+                                        .withOpacity(0.2),
+                                    width: 4,
+                                  ),
+                                  left: const BorderSide(
+                                      color: Colors.transparent),
+                                  right: const BorderSide(
+                                      color: Colors.transparent),
+                                  top: const BorderSide(
+                                      color: Colors.transparent),
+                                ),
+                              ),
+                              lineBarsData: [
+                                LineChartBarData(
+                                  isCurved: true,
+                                  color: const Color(0xFF3BFF49),
+                                  barWidth: 8,
+                                  isStrokeCapRound: true,
+                                  dotData: const FlDotData(show: false),
+                                  belowBarData: BarAreaData(
+                                    show: false,
+                                  ),
+                                  spots: [
+                                    if (summary['earning'] >= 0 &&
+                                        summary['earning'] <= 100) ...[
+                                      const FlSpot(1.5, 1)
+                                    ] else if (summary['earning'] > 100 &&
+                                        summary['earning'] <= 200) ...[
+                                      const FlSpot(1.5, 1),
+                                      const FlSpot(2, 1.5),
+                                    ] else if (summary['earning'] > 200 &&
+                                        summary['earning'] <= 300) ...[
+                                      const FlSpot(1.5, 1),
+                                      const FlSpot(2, 1.5),
+                                      const FlSpot(2.5, 1.8),
+                                    ] else if (summary['earning'] > 300 &&
+                                        summary['earning'] <= 400) ...[
+                                      const FlSpot(1.5, 1),
+                                      const FlSpot(2, 1.5),
+                                      const FlSpot(2.5, 1.8),
+                                      const FlSpot(2.9, 2),
+                                    ] else if (summary['earning'] > 400 &&
+                                        summary['earning'] <= 500) ...[
+                                      const FlSpot(1.5, 1),
+                                      const FlSpot(2, 1.5),
+                                      const FlSpot(2.5, 1.8),
+                                      const FlSpot(2.9, 2),
+                                      const FlSpot(3.4, 2.5),
+                                    ] else if (summary['earning'] > 500 &&
+                                        summary['earning'] <= 600) ...[
+                                      const FlSpot(1.5, 1),
+                                      const FlSpot(2, 1.5),
+                                      const FlSpot(2.5, 1.8),
+                                      const FlSpot(2.9, 2),
+                                      const FlSpot(3.4, 2.5),
+                                      const FlSpot(3.8, 2.8),
+                                    ] else if (summary['earning'] > 600 &&
+                                        summary['earning'] <= 700) ...[
+                                      const FlSpot(1.5, 1),
+                                      const FlSpot(2, 1.5),
+                                      const FlSpot(2.5, 1.8),
+                                      const FlSpot(2.9, 2),
+                                      const FlSpot(3.4, 2.5),
+                                      const FlSpot(3.8, 2.8),
+                                      const FlSpot(4, 3),
+                                    ] else if (summary['earning'] > 700 &&
+                                        summary['earning'] <= 1500) ...[
+                                      const FlSpot(1.5, 1),
+                                      const FlSpot(2, 1.5),
+                                      const FlSpot(2.5, 1.8),
+                                      const FlSpot(2.9, 2),
+                                      const FlSpot(3.4, 2.5),
+                                      const FlSpot(3.9, 2.8),
+                                      const FlSpot(4, 3),
+                                      const FlSpot(4.3, 3.5),
+                                    ] else if (summary['earning'] > 1500 &&
+                                        summary['earning'] <= 5000) ...[
+                                      const FlSpot(1.5, 1),
+                                      const FlSpot(2, 1.5),
+                                      const FlSpot(2.5, 1.8),
+                                      const FlSpot(2.9, 2),
+                                      const FlSpot(3.45, 2.5),
+                                      const FlSpot(3.9, 2.8),
+                                      const FlSpot(4.8, 3),
+                                      const FlSpot(5.6, 3.5),
+                                      const FlSpot(5.9, 3.8),
+                                    ] else if (summary['earning'] > 5000 &&
+                                        summary['earning'] <= 10000) ...[
+                                      const FlSpot(1.5, 1),
+                                      const FlSpot(2, 1.5),
+                                      const FlSpot(2.5, 1.8),
+                                      const FlSpot(2.9, 2),
+                                      const FlSpot(3.45, 2.5),
+                                      const FlSpot(3.9, 2.8),
+                                      const FlSpot(4.8, 3),
+                                      const FlSpot(5.6, 3.5),
+                                      const FlSpot(7, 3.8),
+                                      const FlSpot(9, 4.5),
+                                    ] else if (summary['earning'] > 10000 &&
+                                        summary['earning'] <= 20000) ...[
+                                      const FlSpot(1.5, 1),
+                                      const FlSpot(2, 1.5),
+                                      const FlSpot(2.5, 1.8),
+                                      const FlSpot(2.9, 2),
+                                      const FlSpot(3.45, 2.5),
+                                      const FlSpot(3.9, 2.8),
+                                      const FlSpot(4.8, 3),
+                                      const FlSpot(5.6, 3.5),
+                                      const FlSpot(7, 3.8),
+                                      const FlSpot(8, 4.5),
+                                      const FlSpot(10, 4.6),
+                                    ] else ...[
+                                      const FlSpot(1.5, 1),
+                                      const FlSpot(2, 1.5),
+                                      const FlSpot(2.5, 1.8),
+                                      const FlSpot(2.9, 2),
+                                      const FlSpot(3.45, 2.5),
+                                      const FlSpot(3.9, 2.8),
+                                      const FlSpot(4.8, 3),
+                                      const FlSpot(5.6, 3.5),
+                                      const FlSpot(7, 3.8),
+                                      const FlSpot(8, 4.5),
+                                      const FlSpot(10, 4.6),
+                                      const FlSpot(10.8, 4.9),
+                                    ]
+                                    // FlSpot(3, 1.5),
+                                    // FlSpot(5, 1.4),
+                                    // FlSpot(7, 3.4),
+                                    // FlSpot(10, 2),
+                                    // FlSpot(12, 2.2),
+                                    // FlSpot(13, 1.8),
+                                  ],
+                                ),
+                                LineChartBarData(
+                                  isCurved: true,
+                                  color:
+                                      const Color(0xFFFF3AF2).withOpacity(0.5),
+                                  barWidth: 8,
+                                  isStrokeCapRound: true,
+                                  dotData: const FlDotData(show: false),
+                                  belowBarData: BarAreaData(
+                                    show: true,
+                                    color: const Color(0xFFFF3AF2)
+                                        .withOpacity(0.2),
+                                  ),
+                                  spots: [
+                                    if (summary['sales'] >= 0 &&
+                                        summary['sales'] <= 1) ...[
+                                      const FlSpot(1, 1),
+                                    ] else if (summary['sales'] > 1 &&
+                                        summary['sales'] <= 5) ...[
+                                      const FlSpot(1, 1),
+                                      const FlSpot(2, 2),
+                                    ] else if (summary['sales'] > 5 &&
+                                        summary['sales'] <= 7) ...[
+                                      const FlSpot(1, 1),
+                                      const FlSpot(2, 2),
+                                      const FlSpot(2.5, 1.5),
+                                    ] else if (summary['sales'] > 7 &&
+                                        summary['sales'] <= 10) ...[
+                                      const FlSpot(1, 1),
+                                      const FlSpot(2, 2),
+                                      const FlSpot(3, 1.5),
+                                      const FlSpot(3.8, 2.8),
+                                    ] else if (summary['sales'] > 10 &&
+                                        summary['sales'] <= 15) ...[
+                                      const FlSpot(1, 1),
+                                      const FlSpot(2, 2),
+                                      const FlSpot(3, 1.5),
+                                      const FlSpot(3.8, 2.8),
+                                      const FlSpot(4.2, 3.5),
+                                    ] else if (summary['sales'] > 15 &&
+                                        summary['sales'] <= 20) ...[
+                                      const FlSpot(1, 1),
+                                      const FlSpot(2, 2),
+                                      const FlSpot(3, 1.5),
+                                      const FlSpot(3.8, 2.8),
+                                      const FlSpot(4.2, 3.5),
+                                      const FlSpot(4.8, 3.8),
+                                    ] else if (summary['sales'] > 20 &&
+                                        summary['sales'] <= 25) ...[
+                                      const FlSpot(1, 1),
+                                      const FlSpot(2, 2),
+                                      const FlSpot(3, 1.5),
+                                      const FlSpot(3.8, 2.8),
+                                      const FlSpot(4.2, 3.5),
+                                      const FlSpot(4.8, 3.8),
+                                      const FlSpot(5.6, 3.4),
+                                      const FlSpot(7, 4),
+                                    ] else if (summary['sales'] > 25 &&
+                                        summary['sales'] <= 30) ...[
+                                      const FlSpot(1, 1),
+                                      const FlSpot(2, 2),
+                                      const FlSpot(3, 1.5),
+                                      const FlSpot(3.8, 2.8),
+                                      const FlSpot(4.2, 3.5),
+                                      const FlSpot(5, 3.8),
+                                      const FlSpot(5.8, 3.4),
+                                      const FlSpot(7.6, 4),
+                                      const FlSpot(8.8, 3.9),
+                                      const FlSpot(9, 4.2),
+                                      const FlSpot(10, 5),
+                                    ]
+                                  ],
+                                ),
+                                LineChartBarData(
+                                  isCurved: true,
+                                  // curveSmoothness: 0,
+                                  color:
+                                      const Color(0xFF50E4FF).withOpacity(0.5),
+                                  barWidth: 8,
+                                  isStrokeCapRound: true,
+                                  dotData: const FlDotData(show: true),
+                                  belowBarData: BarAreaData(show: false),
+                                  spots: [
+                                    if (summary['items'] >= 0 &&
+                                        summary['items'] <= 1) ...[
+                                      const FlSpot(2.5, 1),
+                                    ] else if (summary['items'] > 1 &&
+                                        summary['items'] <= 5) ...[
+                                      const FlSpot(2.5, 1),
+                                      const FlSpot(3, 2),
+                                    ] else if (summary['items'] > 5 &&
+                                        summary['items'] <= 7) ...[
+                                      const FlSpot(2.5, 1),
+                                      const FlSpot(3, 2),
+                                      const FlSpot(5, 1.5),
+                                      const FlSpot(7, 2.6),
+                                    ] else if (summary['items'] > 7 &&
+                                        summary['items'] <= 10) ...[
+                                      const FlSpot(2.5, 1),
+                                      const FlSpot(3, 2),
+                                      const FlSpot(5, 1.5),
+                                      const FlSpot(7, 2.6),
+                                      const FlSpot(7.5, 2.2),
+                                      const FlSpot(7.9, 3.5),
+                                    ] else if (summary['items'] > 10 &&
+                                        summary['items'] <= 15) ...[
+                                      const FlSpot(2.5, 1),
+                                      const FlSpot(3, 2),
+                                      const FlSpot(5, 1.5),
+                                      const FlSpot(7, 2.6),
+                                      const FlSpot(7.5, 2.2),
+                                      const FlSpot(7.9, 3.5),
+                                      const FlSpot(8.5, 3.9),
+                                    ] else if (summary['items'] > 15 &&
+                                        summary['items'] <= 20) ...[
+                                      const FlSpot(2.5, 1),
+                                      const FlSpot(3, 2),
+                                      const FlSpot(5, 1.5),
+                                      const FlSpot(7, 2.6),
+                                      const FlSpot(7.5, 2.2),
+                                      const FlSpot(7.9, 3.5),
+                                      const FlSpot(8.5, 3.9),
+                                      const FlSpot(8.7, 4.2),
+                                    ] else if (summary['items'] > 20 &&
+                                        summary['items'] <= 25) ...[
+                                      const FlSpot(2.5, 1),
+                                      const FlSpot(3, 2),
+                                      const FlSpot(5, 1.5),
+                                      const FlSpot(7, 2.6),
+                                      const FlSpot(7.5, 2.2),
+                                      const FlSpot(7.9, 3.5),
+                                      const FlSpot(8.5, 3.9),
+                                      const FlSpot(8.7, 3.5),
+                                      const FlSpot(9, 4),
+                                      const FlSpot(9.5, 5),
+                                    ] else ...[
+                                      const FlSpot(2.5, 1),
+                                      const FlSpot(3, 2),
+                                      const FlSpot(5, 1.5),
+                                      const FlSpot(7, 2.6),
+                                      const FlSpot(7.5, 2.2),
+                                      const FlSpot(7.9, 3.5),
+                                      const FlSpot(8.5, 3.9),
+                                      const FlSpot(8.7, 3.5),
+                                      const FlSpot(9, 4),
+                                      const FlSpot(9.2, 5),
+                                      const FlSpot(9.5, 5.2),
+                                    ]
+                                  ],
+                                ),
+                              ],
+                              minX: 0,
+                              maxX: 14,
+                              maxY: 4,
+                              minY: 0,
+                              // lineTouchData: const LineTouchData(enabled: false),
+                            ),
                             duration: const Duration(milliseconds: 250),
                           ),
                         ),

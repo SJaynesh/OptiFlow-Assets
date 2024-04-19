@@ -1,14 +1,11 @@
-import 'dart:io';
-
 import 'package:app_code/modules/utils/componets/request_page_componet.dart';
 import 'package:app_code/modules/utils/controllers/department_page_controller.dart';
 import 'package:app_code/modules/utils/helpers/fcm_helper.dart';
 import 'package:app_code/modules/utils/models/department_page_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../globals/routes.dart';
 
@@ -16,17 +13,17 @@ class DepartmentPageComponet extends StatelessWidget {
   DepartmentPageComponet({super.key});
 
   static GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController titleController =
-      TextEditingController(text: RequestModel.myProduct);
-  TextEditingController priceController = TextEditingController();
-  TextEditingController qtyController =
-      TextEditingController(text: RequestModel.myQty.toString());
-  TextEditingController categoryController =
-      TextEditingController(text: RequestModel.myCategory);
-  TextEditingController descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController titleController =
+        TextEditingController(text: RequestModel.myProduct);
+    TextEditingController priceController = TextEditingController();
+    TextEditingController qtyController = TextEditingController(
+        text: (RequestModel.myQty == 0) ? "" : RequestModel.myQty.toString());
+    TextEditingController categoryController =
+        TextEditingController(text: RequestModel.myCategory);
+    TextEditingController descriptionController = TextEditingController();
     Size size = MediaQuery.of(context).size;
     double h = size.height;
     double w = size.width;
@@ -57,7 +54,7 @@ class DepartmentPageComponet extends StatelessWidget {
                                 : const AssetImage(
                                         "assets/images/department_page_images/department.png")
                                     as ImageProvider,
-                            fit: BoxFit.cover,
+                            fit: BoxFit.contain,
                           ),
                         ),
                       ),

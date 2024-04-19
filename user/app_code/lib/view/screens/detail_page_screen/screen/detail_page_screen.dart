@@ -87,60 +87,93 @@ class DetailPageScreen extends StatelessWidget {
                                           ),
                                         ),
                                         Expanded(
-                                          child: ListView.builder(
-                                            itemCount: allHistory.length,
-                                            itemBuilder: (context, index) {
-                                              Map<String, dynamic> history =
-                                                  allHistory[index].data();
-                                              if ((product.title ==
-                                                  history['title'])) {
-                                                return Card(
-                                                  child: ListTile(
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
-                                                    ),
-                                                    title: Text(
-                                                      history['title'],
-                                                      style: const TextStyle(
-                                                        color: Colors.green,
-                                                      ),
-                                                    ),
-                                                    subtitle: Row(
-                                                      children: [
-                                                        const Text(
-                                                          "Date: ",
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w900,
+                                          child: (allHistory.isNotEmpty)
+                                              ? ListView.builder(
+                                                  itemCount: allHistory.length,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    Map<String, dynamic>
+                                                        history =
+                                                        allHistory[index]
+                                                            .data();
+                                                    if ((product.title ==
+                                                        history['title'])) {
+                                                      return Card(
+                                                        child: ListTile(
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        15),
+                                                          ),
+                                                          title: Text(
+                                                            history['title'],
+                                                            style:
+                                                                const TextStyle(
+                                                              color:
+                                                                  Colors.green,
+                                                            ),
+                                                          ),
+                                                          subtitle: Row(
+                                                            children: [
+                                                              const Text(
+                                                                "Date: ",
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w900,
+                                                                ),
+                                                              ),
+                                                              Text(
+                                                                "${history['date']}",
+                                                                style:
+                                                                    const TextStyle(
+                                                                  color: Colors
+                                                                      .green,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          trailing: Text(
+                                                            "Qty: ${history['qty']}",
+                                                            style:
+                                                                const TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w900,
+                                                              color:
+                                                                  Colors.green,
+                                                            ),
                                                           ),
                                                         ),
-                                                        Text(
-                                                          "${history['date']}",
-                                                          style:
-                                                              const TextStyle(
-                                                            color: Colors.green,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    trailing: Text(
-                                                      "Qty: ${history['qty']}",
-                                                      style: const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w900,
-                                                        color: Colors.green,
+                                                      );
+                                                    } else {
+                                                      return Container();
+                                                    }
+                                                  },
+                                                )
+                                              : Center(
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Image.asset(
+                                                        "assets/images/detail_page_images/history.png",
+                                                        height: h * 0.2,
                                                       ),
-                                                    ),
+                                                      Text(
+                                                        "No any History",
+                                                        style: TextStyle(
+                                                          fontSize: textScaler
+                                                              .scale(20),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                );
-                                              } else {
-                                                return Container();
-                                              }
-                                            },
-                                          ),
+                                                ),
                                         ),
                                       ],
                                     ),

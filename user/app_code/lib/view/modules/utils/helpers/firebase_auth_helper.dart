@@ -26,4 +26,8 @@ class FireBaseAuthHelper with AuthMixin {
     }
     return res;
   }
+
+  Future<void> logout() async {
+    await firebase.signOut();
+  }
 }

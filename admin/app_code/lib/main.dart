@@ -1,3 +1,4 @@
+import 'package:app_code/modules/utils/controllers/add_product_page_controller.dart';
 import 'package:app_code/modules/utils/controllers/add_user_controller.dart';
 import 'package:app_code/modules/utils/controllers/bottom_navigation_bar_controller.dart';
 import 'package:app_code/modules/utils/controllers/carousal_slider_controller.dart';
@@ -57,6 +58,9 @@ class AdminPanelApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => DepartmentPageController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AllProductPageController(),
         ),
       ],
       child: MaterialApp(

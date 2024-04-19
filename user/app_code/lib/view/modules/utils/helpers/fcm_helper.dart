@@ -5,6 +5,8 @@ import 'package:app_code/view/modules/utils/helpers/firebase_auth_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+import '../models/chat_model.dart';
+
 String userDeptName = "";
 String adminEmail = "";
 
@@ -33,6 +35,7 @@ class FCMHelper {
   }
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> getUserDepartmentData() {
+    log("ADMIN EMAIL 2: $adminEmail");
     return firestore
         .collection(collectionName)
         .doc(adminEmail)
@@ -301,12 +304,14 @@ class FCMHelper {
 
   Future<void> getAdminEmailID() async {
     QuerySnapshot<Map<String, dynamic>> data =
-        await firestore.collection(collectionName).get();
+        await firestore.collection("Inventory-Management").get();
 
     List<DocumentSnapshot<Map<String, dynamic>>> docs = data.docs;
 
+    log("LEN : ${docs.length}");
+
     adminEmail = docs[1].id;
-    log("ADMIN EMAIL : $adminEmail");
+    log("ADMIN EMAIL 1: $adminEmail");
   }
 
   // void updateProfileData({required ProfilePageModel profilePageModel}) async {
@@ -320,4 +325,76 @@ class FCMHelper {
   //         profilePageModel.toMap(),
   //       );
   // }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getAllUsers() {
+    return firestore
+        .collection(collectionName)
+        .doc(adminEmail)
+        .collection(userCollection)
+        .snapshots();
+  }
+
+  Future<void> sendChat({
+    required String senderId,
+    required String receiverId,
+    required ChatModal chatModal,
+  }) async {
+    chatModal.type = 'sender';
+    await firestore
+        .collection(collectionName)
+        .doc(adminEmail)
+        .collection(userCollection)
+        .doc(senderId)
+        .collection(receiverId)
+        .doc(chatModal.getId)
+        .set(chatModal.toMap);
+
+    chatModal.type = 'receiver';
+
+    await firestore
+        .collection(collectionName)
+        .doc(adminEmail)
+        .collection(userCollection)
+        .doc(receiverId)
+        .collection(senderId)
+        .doc(chatModal.getId)
+        .set(chatModal.toMap);
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getAllChart({
+    required String senderId,
+    required String receiverId,
+  }) {
+    return firestore
+        .collection(collectionName)
+        .doc(adminEmail)
+        .collection(userCollection)
+        .doc(senderId)
+        .collection(receiverId)
+        .snapshots();
+  }
+
+  Future<void> deleteChat({
+    required String senderId,
+    required String receiverId,
+    required String date,
+  }) async {
+    await firestore
+        .collection(collectionName)
+        .doc(adminEmail)
+        .collection(userCollection)
+        .doc(senderId)
+        .collection(receiverId)
+        .doc(date)
+        .delete();
+
+    await firestore
+        .collection(collectionName)
+        .doc(adminEmail)
+        .collection(userCollection)
+        .doc(receiverId)
+        .collection(senderId)
+        .doc(date)
+        .delete();
+  }
 }

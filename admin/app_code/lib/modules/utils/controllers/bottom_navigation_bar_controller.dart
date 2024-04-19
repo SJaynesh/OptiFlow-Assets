@@ -9,7 +9,7 @@ class BottomNavigationBarController extends ChangeNotifier {
   BottomNavigationBarModel barModel = BottomNavigationBarModel(
     index: 0,
     componet: [
-      const HomePageComponet(),
+      HomePageComponet(),
       DepartmentPageComponet(),
       const RequestPageComponet(),
       AddUserPageComponet(),

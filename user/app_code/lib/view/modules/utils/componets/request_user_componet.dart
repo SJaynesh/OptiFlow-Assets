@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:app_code/view/modules/utils/controllers/request_user_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../globals/routes.dart';
 import '../helpers/fcm_helper.dart';
+import '../helpers/firebase_auth_helper.dart';
 
 class RequestUserComponet extends StatelessWidget {
   RequestUserComponet({super.key});
@@ -47,13 +51,64 @@ class RequestUserComponet extends StatelessWidget {
           },
         ),
         actions: [
-          CircleAvatar(
-            radius: w * 0.07,
-            backgroundColor: Colors.white,
-            child: CircleAvatar(
-              radius: w * 0.058,
-              backgroundImage: const NetworkImage(
-                  "https://avatars.githubusercontent.com/u/115562979?v=4"),
+          GestureDetector(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text(
+                      "Logout",
+                      style: TextStyle(
+                        fontSize: textScaler.scale(25),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    content: Text(
+                      "Are you sure you want to logout?",
+                      style: TextStyle(
+                        fontSize: textScaler.scale(18),
+                      ),
+                    ),
+                    actions: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          OutlinedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text("Cancel"),
+                          ),
+                          SizedBox(
+                            width: h * 0.02,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              FireBaseAuthHelper.firebaseAuth
+                                  .logout()
+                                  .then((value) {
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                    Routes.introPageScreen, (route) => false);
+                              });
+                            },
+                            child: const Text(
+                              "Logout",
+                              style: TextStyle(
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  );
+                },
+              );
+            },
+            child: Image.asset(
+              "assets/images/splash_images/splash_image.png",
+              height: h * 0.03,
             ),
           ),
           SizedBox(
@@ -65,13 +120,24 @@ class RequestUserComponet extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child:
-                  Image.asset("assets/images/request_page_images/request.png"),
+            Text(
+              "Request User",
+              style: TextStyle(
+                fontSize: textScaler.scale(20),
+                fontWeight: FontWeight.w500,
+                decoration: TextDecoration.underline,
+                decorationColor: Colors.grey,
+              ),
+            ),
+            Center(
+              child: Image.asset(
+                "assets/images/request_page_images/request.png",
+                height: h * 0.3,
+              ),
             ),
             Expanded(
-              flex: 2,
               child: Consumer<RequestUserController>(
                 builder: (context, request, child) {
                   return Form(
@@ -83,46 +149,49 @@ class RequestUserComponet extends StatelessWidget {
                           Text(
                             "Category ",
                             style: TextStyle(
-                              fontSize: textScaler.scale(20),
+                              fontSize: textScaler.scale(18),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          TextFormField(
-                            controller:
-                                request.requestUserModel.categoryController,
-                            validator: (val) =>
-                                (val!.isEmpty) ? "Enter any category.." : null,
-                            decoration: InputDecoration(
-                              hintText: "Enter any category...",
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(18),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(18),
-                                borderSide: const BorderSide(
-                                  width: 2,
-                                  color: Color(0xff322bc3),
+                          SizedBox(
+                            height: h * 0.07,
+                            child: TextFormField(
+                              controller:
+                                  request.requestUserModel.categoryController,
+                              validator: (val) => (val!.isEmpty)
+                                  ? "Enter any category.."
+                                  : null,
+                              textInputAction: TextInputAction.next,
+                              decoration: InputDecoration(
+                                hintText: "Enter any category...",
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(18),
-                                borderSide: const BorderSide(
-                                  color: Colors.redAccent,
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: const BorderSide(
+                                    width: 2,
+                                    color: Color(0xff322bc3),
+                                  ),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                  borderSide: const BorderSide(
+                                    color: Colors.redAccent,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            height: h * 0.01,
                           ),
                           Text(
                             "Product ",
                             style: TextStyle(
-                              fontSize: textScaler.scale(20),
+                              fontSize: textScaler.scale(18),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           TextFormField(
+                            textInputAction: TextInputAction.next,
                             controller:
                                 request.requestUserModel.productController,
                             validator: (val) =>
@@ -147,13 +216,10 @@ class RequestUserComponet extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: h * 0.01,
-                          ),
                           Text(
                             "Date",
                             style: TextStyle(
-                              fontSize: textScaler.scale(20),
+                              fontSize: textScaler.scale(18),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -212,18 +278,15 @@ class RequestUserComponet extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: h * 0.01,
-                          ),
                           Text(
                             "Qty",
                             style: TextStyle(
-                              fontSize: textScaler.scale(20),
+                              fontSize: textScaler.scale(18),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Container(
-                            height: h * 0.06,
+                            height: h * 0.05,
                             width: w * 0.3,
                             margin: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
@@ -319,7 +382,7 @@ class RequestUserComponet extends StatelessWidget {
                                   splashColor: Colors.white30,
                                   borderRadius: BorderRadius.circular(12),
                                   child: Container(
-                                    padding: const EdgeInsets.all(15),
+                                    padding: const EdgeInsets.all(10),
                                     child: Text(
                                       "Request",
                                       style: TextStyle(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../modules/utils/controllers/product_controller.dart';
+import '../../chat_page_screen/screen/chat_page.dart';
 
 class ShopPageScreen extends StatelessWidget {
   const ShopPageScreen({super.key});
@@ -47,6 +48,38 @@ class ShopPageScreen extends StatelessWidget {
             ),
           ],
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      const ChatPage(),
+                  transitionDuration: const Duration(seconds: 1),
+                  reverseTransitionDuration: const Duration(seconds: 1),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    const begin = Offset(1.0, 0.0);
+                    const end = Offset.zero;
+                    const curve = Curves.ease;
+
+                    var tween = Tween(begin: begin, end: end)
+                        .chain(CurveTween(curve: curve));
+
+                    return SlideTransition(
+                      position: animation.drive(tween),
+                      child: child,
+                    );
+                  },
+                ),
+              );
+            },
+            icon: const Icon(Icons.chat),
+          ),
+          SizedBox(
+            width: w * 0.04,
+          ),
+        ],
         centerTitle: true,
         backgroundColor: const Color(0xffF2F2F2),
       ),

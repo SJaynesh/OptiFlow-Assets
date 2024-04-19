@@ -64,16 +64,6 @@ class UserPanelApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        // theme: ThemeData(
-        //   useMaterial3: true,
-        //   textTheme: const TextTheme(
-        //     bodyMedium: TextStyle(
-        //       fontSize: 20,
-        //       color: Colors.deepPurple,
-        //       fontWeight: FontWeight.w400,
-        //     ),
-        //   ),
-        // ),
         routes: {
           Routes.splashScreen: (context) => const SplashScreen(),
           Routes.introPageScreen: (context) => const IntroPageScreen(),

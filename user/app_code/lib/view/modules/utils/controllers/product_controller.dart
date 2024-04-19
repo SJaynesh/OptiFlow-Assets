@@ -10,10 +10,16 @@ class ProductController extends ChangeNotifier {
     Products: [],
     Categories: [],
     itemsLength: 0,
+    isShimmer: false,
   );
 
   void getProductData({required List<CategoryDataModel> productData}) {
     productModel.Products = productData;
+    notifyListeners();
+  }
+
+  void getIsShimmer() {
+    productModel.isShimmer = true;
     notifyListeners();
   }
 

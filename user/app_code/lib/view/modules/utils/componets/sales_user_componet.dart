@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:app_code/view/modules/utils/controllers/product_controller.dart';
 import 'package:app_code/view/modules/utils/controllers/sales_user_controller.dart';
@@ -7,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../globals/routes.dart';
 import '../helpers/fcm_helper.dart';
+import '../helpers/firebase_auth_helper.dart';
 
 class SalesUserComponet extends StatelessWidget {
   const SalesUserComponet({super.key});
@@ -50,13 +53,64 @@ class SalesUserComponet extends StatelessWidget {
           },
         ),
         actions: [
-          CircleAvatar(
-            radius: w * 0.07,
-            backgroundColor: Colors.white,
-            child: CircleAvatar(
-              radius: w * 0.058,
-              backgroundImage: const NetworkImage(
-                  "https://avatars.githubusercontent.com/u/115562979?v=4"),
+          GestureDetector(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text(
+                      "Logout",
+                      style: TextStyle(
+                        fontSize: textScaler.scale(25),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    content: Text(
+                      "Are you sure you want to logout?",
+                      style: TextStyle(
+                        fontSize: textScaler.scale(18),
+                      ),
+                    ),
+                    actions: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          OutlinedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text("Cancel"),
+                          ),
+                          SizedBox(
+                            width: h * 0.02,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              FireBaseAuthHelper.firebaseAuth
+                                  .logout()
+                                  .then((value) {
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                    Routes.introPageScreen, (route) => false);
+                              });
+                            },
+                            child: const Text(
+                              "Logout",
+                              style: TextStyle(
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  );
+                },
+              );
+            },
+            child: Image.asset(
+              "assets/images/splash_images/splash_image.png",
+              height: h * 0.03,
             ),
           ),
           SizedBox(
@@ -73,10 +127,19 @@ class SalesUserComponet extends StatelessWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: Center(
-                        child: Image.asset(
-                            "assets/images/sales_page_images/sales.png"),
+                    Text(
+                      "Sale Product",
+                      style: TextStyle(
+                        fontSize: textScaler.scale(20),
+                        fontWeight: FontWeight.w500,
+                        decoration: TextDecoration.underline,
+                        decorationColor: Colors.grey,
+                      ),
+                    ),
+                    Center(
+                      child: Image.asset(
+                        "assets/images/sales_page_images/sales.png",
+                        height: h * 0.25,
                       ),
                     ),
                     Expanded(
@@ -103,7 +166,7 @@ class SalesUserComponet extends StatelessWidget {
                             Text(
                               "Category ",
                               style: TextStyle(
-                                fontSize: textScaler.scale(20),
+                                fontSize: textScaler.scale(18),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -254,7 +317,7 @@ class SalesUserComponet extends StatelessWidget {
                             Text(
                               "Product",
                               style: TextStyle(
-                                fontSize: textScaler.scale(20),
+                                fontSize: textScaler.scale(18),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -308,7 +371,7 @@ class SalesUserComponet extends StatelessWidget {
                             Text(
                               "Date",
                               style: TextStyle(
-                                fontSize: textScaler.scale(20),
+                                fontSize: textScaler.scale(18),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -362,14 +425,13 @@ class SalesUserComponet extends StatelessWidget {
                             Text(
                               "Qty",
                               style: TextStyle(
-                                fontSize: textScaler.scale(20),
+                                fontSize: textScaler.scale(18),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             Container(
-                              height: h * 0.06,
+                              height: h * 0.05,
                               width: w * 0.3,
-                              margin: const EdgeInsets.all(5),
                               decoration: BoxDecoration(
                                 color:
                                     const Color(0xff35383f).withOpacity(0.85),
@@ -466,7 +528,7 @@ class SalesUserComponet extends StatelessWidget {
                                     splashColor: Colors.white30,
                                     borderRadius: BorderRadius.circular(12),
                                     child: Container(
-                                      padding: const EdgeInsets.all(15),
+                                      padding: const EdgeInsets.all(10),
                                       child: Text(
                                         "Checkout ➡️",
                                         style: TextStyle(
