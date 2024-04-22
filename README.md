@@ -175,11 +175,11 @@
 <br><br>
 
 
-## *** OUTPUT OF PROJECT :***
+## ***OUTPUT OF PROJECT :***
 
 <br><br>
 
-### ADMIN OUTPUT :
+### ADMIN PANEL OUTPUT :
 
 <br><br>
 
@@ -301,6 +301,90 @@
  <img  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/8b7956f9-9863-4e11-b550-a4229f8083b4.jpg" width=22% height=35% >
 </p>
 
+
+<br><br>
+
+### USER PANEL OUTPUT :
+
+<br><br>
+
+<p>
+  <img align = "left"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/a4dc0405-b048-4541-874d-6b306a752c39.jpg" width=22% height=35% >
+  
+  <img align = "left"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/5ea9926c-bd59-4040-a9a6-514f33bc3b3b.jpg" width=22% height=35% >
+ 
+ <img align = "left"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/918804e1-676d-4bbf-8a5d-6859865c90ce.jpg" width=22% height=35% >
+ 
+ <img  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/04822056-e486-4eb2-8458-c10b517cfbee.jpg" width=22% height=35% >
+</p>
+
+
+<br><br>
+
+<p>
+  <img align = "left"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/6a505f04-fdd7-4ca9-a9dd-20c999dfe015.jpg" width=22% height=35% >
+  
+  <img align = "left"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/566c6991-93cc-48a7-a93b-ea82855ddf6b.jpg" width=22% height=35% >
+ 
+ <img align = "left"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/eb1fa8f2-d05a-44b8-96ca-146370fbec94.jpg" width=22% height=35% >
+ 
+ <img  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/a1710c7f-1e9c-4756-af51-a3acedcffef3.jpg" width=22% height=35% >
+</p>
+
+<br><br>
+
+<p>
+  <img align = "left"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/7c6c1234-855e-4776-9af8-c2f3cc8c70ee.jpg" width=22% height=35% >
+  
+  <img align = "left"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/4ea6a566-29f8-4d8a-9768-47a1d61b69af.jpg" width=22% height=35% >
+ 
+ <img align = "left"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/bc2edde2-78d3-48d5-b80f-ec5fc7892f65.jpg" width=22% height=35% >
+ 
+ <img  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/609290a5-fa13-41f5-a0fa-842c9d31d907.jpg" width=22% height=35% >
+</p>
+
+<br><br>
+
+<p>
+  <img align = "left"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/00fb25c1-a4f3-4539-8d5a-a8754865a25f.jpg" width=22% height=35% >
+  
+  <img align = "left"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/622af5f9-31c5-42ea-b709-01d0b933f6c6.jpg" width=22% height=35% >
+ 
+ <img align = "left"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/83b03e5d-71b1-4595-91e8-f68260d09897.jpg" width=22% height=35% >
+ 
+ <img  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/ef63f548-c677-46d7-b416-ea2ac98fe5a1.jpg" width=22% height=35% >
+</p>
+
+<br><br>
+
+<p>
+  <img align = "left"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/de6fd349-5f2a-440e-a70c-2e4c63773a15.jpg" width=22% height=35% >
+  
+  <img align = "left"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/8a9b03f2-9a3d-4816-9ca8-5b4f344acb0f.jpg" width=22% height=35% >
+ 
+ <img align = "left"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/311a1da8-7734-4bd3-acb4-a96001e16a8a.jpg" width=22% height=35% >
+ 
+ <img  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/76d9ac07-7adf-4e62-8912-b8534ef9b7c9.jpg" width=22% height=35% >
+</p>
+
+
+<br><br>
+
+<p>
+  <img align = "left"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/46d7d4dd-3270-4d07-805b-3144189e858b.jpg" width=22% height=35% >
+  
+  <img align = "left"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/f54b10a8-163e-4d89-80e7-0002430288d5.jpg" width=22% height=35% >
+ 
+ <img align = "left"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/a8921f95-37bd-45b6-8d0c-edb51d95a73e.jpg" width=22% height=35% >
+ 
+ <img  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/2a5033ea-2413-469a-86d7-351306a3af26.jpg" width=22% height=35% >
+</p>
+
+<br><br>
+
+<p>
+ <img  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/a1108cf2-bc66-40da-8566-420efe1586e1.jpg" width=22% height=35% >
+</p>
 
 
 
