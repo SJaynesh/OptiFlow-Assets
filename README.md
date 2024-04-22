@@ -126,6 +126,48 @@
 <hr>
 
 
+### ER DIAGRAMS : 
 
+<br>
+
+<img align = "center"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/df2b0465-b71e-42e7-ad64-1039b21f5ef0.jpg" width=80% height=70% >
+
+<br><br>
+
+### USER CASE : 
+
+<br>
+
+<img align = "center"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/49beda91-98c9-482d-a98a-a52f8e91f4fa.jpg" width=80% height=60%>
+
+<br><br>
+
+<img align = "center"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/453b631f-5de6-4343-9c0d-1310a98e0419.jpg" width=80% height=60%>
+
+
+<br><br>
+
+### CLASS DIAGRAMS : 
+
+<br>
+
+<img align = "center"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/4660d49f-017c-4181-8aed-98b0c18935a4.jpg" width=80% height=60%>
+
+<br><br>
+
+### ADMIN APP FLOW : 
+
+<br>
+
+<img align = "center"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/6b024f4b-a99b-4d71-a423-1a560889c618.jpg" width=80% height=60%>
+
+
+<br><br>
+
+### USER APP FLOW : 
+
+<br>
+
+<img align = "center"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/c459775f-9d90-4239-b115-cc4148ebdad6.jpg" width=80% height=60%>
 
 
