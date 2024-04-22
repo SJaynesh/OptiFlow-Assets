@@ -75,9 +75,55 @@
 > **🔹 Real-Time Updates :** The app ensures inventory levels are dynamically adjusted in real-time post-sale, maintaining precise and up-to-date stock information at all times. 🔄📊
 
 
+<br><br>
+
+## ***🌳 Environment Description 🏙️ :***
+
+<br>
+
+### 💻🔧 Hardware and Software Requirements 📋 
+
+<br>
+
+<img align = "center"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/b97a397b-cb69-420a-a3d7-8a31220bc0d7.jpg" width=65% height=70% >
+
+<br><br>
+
+<img align = "center"  src = "https://github.com/SJaynesh/OptiFlow-Assets/assets/115562979/6d7bff0a-bbaa-428a-ba7e-26568cc7ba68.jpg" width=65% height=70% >
+
+<br><br>
 
 
+## ***💻🔧 Technology Used 🛠️ :***
 
+<br>
+
+<hr>
+
+## Front End Language
+- **Flutter** 📱: 
+  - Flutter is an open-source UI software development kit created by Google. It is used to develop applications for mobile, web, and desktop from a single codebase. Flutter allows developers to write code once and deploy it across multiple platforms, reducing development time and effort.
+  
+- **Widgets** 🧩:
+  - In Flutter, widgets are the basic building blocks of the user interface (UI). Everything you see on the screen in a Flutter application is a widget, whether it's a button, text field, image, layout, or even the entire app itself. Widgets are responsible for presenting the visual elements of your app and responding to user interactions.
+
+## Back End Language
+- **Dart** 🎯:
+  - Dart is a programming language developed by Google, designed primarily for building web, mobile, and desktop applications. It's the language used for writing Flutter apps, although it's not limited to Flutter development; Dart can also be used for server-side and command-line applications.
+
+- **Firebase** 🔥:
+  - Firebase is a comprehensive platform developed by Google for building and managing web and mobile applications. It provides a wide range of tools and services to help developers develop, grow, and monetize their apps more effectively.
+
+<hr>
+
+<br><br>
+
+
+## ***System Design :***
+
+<br>
+
+<hr>
 
 
 
