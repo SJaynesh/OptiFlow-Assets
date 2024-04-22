@@ -41,7 +41,41 @@
 > 1. **Admin Panel**
 > 2. **User Panel**
 
+
+> ✓ **OptiFlow Assets** is a mobile app for efficient inventory management, enabling        	seamless transactions and real-time stock updates for users and admins, powered by Flutter and Firebase. It simplifies shopping and billing, ensuring inventory accuracy for businesses.
+
 <hr>
+
+<br><br>
+
+## ***OBJECTIVES OF THE PROJECT :***
+
+<br>
+
+### ➢  General Objective :-
+
+<br>
+
+> **🔹 Admin Panel :**   A control hub 🎛️ for business owners to view earnings, sales, and manage products department-wise, complete with a splash screen and secure login functionality.
+
+<br>
+
+> **🔸 User Panel :** An intuitive interface 🖥️ that showcases products by department, empowering users to sell items and manage their profiles after signing in.
+
+<br>
+
+> **🔹 Product Management :** Admins can seamlessly add products categorized by department 📦, with all data securely stored in the Firebase database 🔒.
+
+<br>
+
+> **🔸 Access Requests :** Users have the ability to request access to the system, and upon approval, gain full engagement capabilities with the inventory and sales process. 📝✔️
+
+<br>
+
+> **🔹 Real-Time Updates :** The app ensures inventory levels are dynamically adjusted in real-time post-sale, maintaining precise and up-to-date stock information at all times. 🔄📊
+
+
+
 
 
 
