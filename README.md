@@ -119,6 +119,21 @@
 <br><br>
 
 
+<h2>📃Documetation </h2>
+
+[Documentation](https://docs.google.com/document/d/1nAoVb5_QaaUSxq7Z6p5ZfPGkr1XHKnzac47Sgxm02OM/edit)
+
+
+<br><br>
+
+
+<h2>📃PPT </h2>
+
+[PPT](https://docs.google.com/presentation/d/1IRHIvMXO5XWqvJo9ctKL5pHJi8aNSHweqQ42cIaji9c/edit#slide=id.g2acb3c98ed2_2_7404)
+
+
+
+
 ## ***System Design :***
 
 <br>
